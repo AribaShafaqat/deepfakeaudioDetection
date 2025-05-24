@@ -1,0 +1,8 @@
+2025-04-25 12:20:12,015 - ERROR - Access denied for user: admin
+2025-04-25 12:32:55,035 - INFO - admin started training.
+2025-04-25 12:33:07,149 - ERROR - Command '['python', 'train.py']' returned non-zero exit status 1.
+2025-04-25 12:50:12,372 - INFO - admin started training.
+2025-04-25 12:50:21,500 - ERROR - Command '['python', 'train.py']' returned non-zero exit status 1.
+2025-04-25 13:03:35,301 - INFO - admin started training.
+2025-04-25 13:03:44,695 - ERROR - Command '['python', 'train.py']' returned non-zero exit status 1.
+2025-04-25 13:16:13,122 - INFO - admin started training.

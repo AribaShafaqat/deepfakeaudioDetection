@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prediction Result</title>
+  <style>
+    img {
+      max-width: 90%;
+      height: auto;
+      margin: 20px auto;
+      display: block;
+    }
+    .label {
+      font-size: 24px;
+      text-align: center;
+      margin-top: 20px;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="label">
+    Prediction: <strong>{{ prediction }}</strong>
+  </div>
+  <div>
+    <img src="data:image/png;base64,{{ plot_image }}" alt="Waveform and Spectrogram Plot">
+  </div>
+</body>
+</html>

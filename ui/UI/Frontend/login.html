@@ -1,0 +1,497 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EchoLock Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #111827;
+    }
+
+    .logo-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .logo-container img {
+      width: 80px;
+      height: 80px;
+    }
+
+    .logo-container h1 {
+      font-size: 30px;
+      margin: 10px 0 0;
+      color: #110c74;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border: 2px solid #d1d5db;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      color: #110c74;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 300px;
+    }
+
+    .input-group {
+      position: relative;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 15px 12px 40px;
+      border: 1px solid #d1d5db;
+      border-radius: 5px;
+      background-color: #f9fafb;
+      color: #110c74;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    .input-group i {
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      transform: translateY(-50%);
+      color: #110c74;
+      font-size: 16px;
+    }
+
+    .btn-wrapper {
+      width: 100%;
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    button.login-btn, 
+    .google-btn {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 5px;
+      font-size: 16px;
+      box-sizing: border-box;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    button.login-btn {
+      background-color: #110c74;
+      border: none;
+      color: #ffffff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button.login-btn:hover {
+      background-color: #0d0865;
+    }
+
+    .google-btn {
+      background-color: #ffffff;
+      border: 1px solid #d1d5db;
+      color: #374151;
+      font-size: 14px;
+      font-weight: normal;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .google-btn:hover {
+      background-color: #f3f4f6;
+    }
+
+    .google-btn img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .options {
+      margin-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151; /* Dark Gray */
+    }
+
+    .options label {
+      display: flex;
+      align-items: center;
+    }
+
+    .options input[type="checkbox"] {
+      margin-right: 5px;
+    }
+
+    .options a {
+      color: #374151; /* Dark Gray */
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .options a:hover {
+      text-decoration: underline;
+    }
+
+    .signup-link {
+      margin-top: 20px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #374151; /* Dark Gray */
+    }
+
+    .signup-link a {
+      color: #374151; /* Dark Gray */
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="logo-container">
+  <img src="logo.png" alt="EchoLock Logo">
+  <h1>EchoLock</h1>
+</div>
+
+<div class="avatar">
+  <i class="fas fa-user"></i>
+</div>
+
+<form>
+  <div class="input-group">
+    <i class="fas fa-user"></i>
+    <input type="text" placeholder="User Name" required>
+  </div>
+  <div class="input-group">
+    <i class="fas fa-lock"></i>
+    <input type="password" placeholder="Password" required>
+  </div>
+
+  <div class="btn-wrapper">
+    <button type="submit" class="login-btn">Login</button>
+
+
+
+     <button type="button" class="google-btn">
+      <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo">
+      Continue with Google
+    </button>
+  </div> 
+
+  <div class="options">
+    <label><input type="checkbox"> Remember me</label>
+    <a href="#">Forgot password?</a>
+  </div>
+
+  <div class="signup-link">
+    Don't have an account? <a href="signup.html">Sign Up</a>
+  </div>
+</form>
+<script>
+    const form = document.querySelector('form');
+
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const username = form.querySelector('input[type="text"]').value;
+  const password = form.querySelector('input[type="password"]').value;
+
+  fetch('/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ username, password })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.token) {
+      localStorage.setItem('authToken', data.token);
+      window.location.href = '/home';
+    } else {
+      alert('Invalid credentials');
+    }
+  });
+});
+
+
+</script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EchoLock Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #111827;
+    }
+
+    .logo-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .logo-container img {
+      width: 80px;
+      height: 80px;
+    }
+
+    .logo-container h1 {
+      font-size: 30px;
+      margin: 10px 0 0;
+      color: #110c74;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border: 2px solid #d1d5db;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      color: #110c74;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 300px;
+    }
+
+    .input-group {
+      position: relative;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 15px 12px 40px;
+      border: 1px solid #d1d5db;
+      border-radius: 5px;
+      background-color: #f9fafb;
+      color: #110c74;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    .input-group i {
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      transform: translateY(-50%);
+      color: #110c74;
+      font-size: 16px;
+    }
+
+    .btn-wrapper {
+      width: 100%;
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    button.login-btn {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 5px;
+      font-size: 16px;
+      box-sizing: border-box;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    button.login-btn {
+      background-color: #110c74;
+      border: none;
+      color: #ffffff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button.login-btn:hover {
+      background-color: #0d0865;
+    }
+
+    .options {
+      margin-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .options label {
+      display: flex;
+      align-items: center;
+    }
+
+    .options input[type="checkbox"] {
+      margin-right: 5px;
+    }
+
+    .options a {
+      color: #374151;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .options a:hover {
+      text-decoration: underline;
+    }
+
+    .signup-link {
+      margin-top: 20px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .signup-link a {
+      color: #374151;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="logo-container">
+  <img src="static/images/logo.png" alt="EchoLock Logo">
+  <h1>EchoLock</h1>
+</div>
+
+<div class="avatar">
+  <i class="fas fa-user"></i>
+</div>
+
+<form id="login-form">
+  <div class="input-group">
+    <i class="fas fa-envelope"></i>
+    <input type="email" id="email" placeholder="Email Address" required>
+  </div>
+  <div class="input-group">
+    <i class="fas fa-lock"></i>
+    <input type="password" id="password" placeholder="Password" required>
+  </div>
+
+  <div class="btn-wrapper">
+    <button type="submit" class="login-btn">Login</button>
+  </div>
+
+  <div class="options">
+    <label><input type="checkbox"> Remember me</label>
+    <a href="#">Forgot password?</a>
+  </div>
+
+  <div class="signup-link">
+    Don't have an account? <a href="signup.html">Sign Up</a>
+  </div>
+</form>
+
+<script>
+  document.getElementById('login-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+
+ fetch('http://localhost:5000/auth/login', {  // Make sure this URL is correct
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email, password }),
+  })
+  .then(response => {
+    // Check if response is okay (status code 2xx)
+    if (!response.ok) {
+      throw new Error('Failed to authenticate');
+    }
+    return response.json();
+  })
+  .then(data => {
+    if (data.token) {
+      localStorage.setItem('authToken', data.token);
+      window.location.href = '\home';  // Redirect to home after successful login
+    } else {
+      alert('Invalid credentials or account not verified.');
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Something went wrong. Please try again.');
+  });
+});
+
+</script>
+
+</body>
+</html>

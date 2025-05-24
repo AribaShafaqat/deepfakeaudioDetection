@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EchoLock - Sign Up</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #111827;
+    }
+
+    .logo-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .logo-container img {
+      width: 80px;
+      height: 80px;
+    }
+
+    .logo-container h1 {
+      font-size: 30px;
+      margin: 10px 0 0;
+      color: #110c74;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border: 2px solid #d1d5db;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      color: #110c74;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 300px;
+    }
+
+    .input-group {
+      position: relative;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 15px 12px 40px;
+      border: 1px solid #d1d5db;
+      border-radius: 5px;
+      background-color: #f9fafb;
+      color: #110c74;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    .input-group i {
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      transform: translateY(-50%);
+      color: #110c74;
+      font-size: 16px;
+    }
+
+    #otpBox {
+      display: none;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    #otpBox input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 5px;
+      border: 1px solid #d1d5db;
+      margin-bottom: 10px;
+    }
+
+    #otpBox button {
+      padding: 12px;
+      background-color: #110c74;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #otpBox button:hover {
+      background-color: #0e0a5a;
+    }
+
+    .btn-wrapper {
+      width: 100%;
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    button.signup-btn, 
+    .google-btn {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 5px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    button.signup-btn {
+      background-color: #110c74;
+      border: none;
+      color: #ffffff;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    button.signup-btn:hover {
+      background-color: #0e0a5a;
+    }
+
+    .google-btn {
+      background-color: #ffffff;
+      border: 1px solid #d1d5db;
+      color: #374151;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .google-btn:hover {
+      background-color: #f3f4f6;
+    }
+
+    .google-btn img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .login-link {
+      margin-top: 20px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .login-link a {
+      color: #110c74;
+      text-decoration: none;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo-container">
+    <img src="static/images/logo.png" alt="EchoLock Logo" />
+    <h1>EchoLock</h1>
+  </div>
+
+  <div class="avatar">
+    <i class="fas fa-user-plus"></i>
+  </div>
+
+  <form id="signupForm">
+    <div class="input-group">
+      <i class="fas fa-user"></i>
+      <input type="text" id="name" placeholder="Name" required />
+    </div>
+    <div class="input-group">
+      <i class="fas fa-envelope"></i>
+      <input type="email" id="email" placeholder="Email Address" required />
+    </div>
+    
+    <div class="input-group">
+      <i class="fas fa-lock"></i>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Password"
+        required
+        
+        title="Minimum 8 characters, at least one uppercase, one lowercase, one number and one special character."
+      />
+    </div>
+    <p id="password-error" style="color: red; font-size: 0.9rem;"></p>
+    
+
+    <div class="btn-wrapper">
+      <button type="submit" class="signup-btn">Sign Up</button>
+      <button type="button" class="google-btn" id="googleSignUpBtn">
+        <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo" />
+        Sign Up with Google
+      </button>
+    </div>
+    
+    
+    <div id="otpBox">
+      <input type="text" id="otp" placeholder="Enter OTP" />
+      <button type="button" onclick="verifyOTP()">Verify OTP</button>
+    </div>
+
+    <div class="login-link">
+      Already have an account? <a href="login.html">Login</a>
+    </div>
+  </form>
+
+ <!-- Google Sign-Up Firebase Logic -->
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js';
+  import { getAuth, GoogleAuthProvider, signInWithPopup } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-auth.js';
+
+  // Declare global variable for storing email
+  let emailGlobal = '';
+
+  // Initialize Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyCKYhPYN9qpzeiVnc9EkGzaab3iKLdzego",
+    authDomain: "deepfake-audio-detection-f420a.firebaseapp.com",
+    projectId: "deepfake-audio-detection-f420a",
+    storageBucket: "deepfake-audio-detection-f420a.appspot.com",
+    messagingSenderId: "323364867107",
+    appId: "G-BF3XL8L10R"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  //  Attach OTP verification function to window for use with onclick
+  window.verifyOTP = async function () {
+    const otp = document.getElementById('otp').value;
+
+    try {
+      const response = await fetch('http://localhost:5000/auth/verify-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: emailGlobal, otp })
+      });
+
+      const result = await response.json();
+
+     
+      if (response.ok) {
+  if (result.token) {
+    localStorage.setItem('authToken', result.token);
+    alert("Registration complete!");
+    window.location.href = '\home'; 
+  } else {
+    alert("OTP verified but token missing.");
+  }
+}
+
+    } catch (error) {
+      console.error("Error verifying OTP:", error);
+      alert("Error verifying OTP.");
+    }
+  };
+
+  // Google Sign-Up Logic
+  document.getElementById("googleSignUpBtn").addEventListener("click", async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      console.log(user);
+
+      // Send user details to backend for registration
+      const response = await fetch('http://localhost:5000/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: user.displayName,
+          email: user.email,
+          password: user.uid
+        })
+      });
+    
+
+      const resultData = await response.json();
+
+      if (response.ok) {
+        alert("OTP sent to your email. Please verify.");
+        document.getElementById('otpBox').style.display = 'block';
+        emailGlobal = user.email; // Store email for OTP verification
+      } else {
+        alert('Error: ' + resultData.message);
+      }
+      
+
+    } catch (error) {
+      console.error("Error signing up with Google:", error);
+      alert("Google Sign-Up failed.");
+    }
+    if (response.ok) {
+  alert("OTP sent to your email. Please verify.");
+  document.getElementById('otpBox').style.display = 'block';
+  emailGlobal = user.email;
+    } 
+
+  });
+
+
+
+
+  document.getElementById('signupForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const passwordError = document.getElementById('password-error');
+
+  // Password Validation for manual signup
+  const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+  if (!passwordPattern.test(password)) {
+    passwordError.textContent = "Password must be at least 8 characters long, include uppercase, lowercase, number, and special character.";
+    return;
+  } else {
+    passwordError.textContent = ""; // Clear error if valid
+  }
+
+    emailGlobal = email; // Store email for OTP verification
+
+    try {
+      const response = await fetch('http://localhost:5000/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password })
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert("OTP sent to your email. Please verify.");
+        document.getElementById('otpBox').style.display = 'block';
+      } else {
+        alert('Error: ' + result.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error: Could not connect to server.");
+    }
+  });
+ 
+  
+</script>
+
+</body>
+</html>

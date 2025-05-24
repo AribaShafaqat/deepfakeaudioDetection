@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EchoLock - Deepfake Audio Detection</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="static/css/style.css">
+
+  
+</head> 
+<body>
+
+  <nav class="navbar navbar-expand-lg bg-white shadow-sm" style="background-color: #6a4c9c;">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <span class="fw-bold text-purple">EchoLock</span>
+        <img src="./static/images/logo.png" alt="EchoLock Logo" class="logo me-2" style="height: 50px;">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto me-3">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        </ul>
+  
+        <!-- Profile Icon Using Bootstrap Icon -->
+        <div id="profile-icon" class="ms-2 position-relative" style="cursor: pointer;">
+          <i class="bi bi-person-circle" style="font-size: 40px; color: rgb(95, 9, 82);"></i>
+        </div>
+        <button id="logout-btn" class="btn btn-outline-danger ms-3">Logout</button>
+
+  
+        <!-- User Info Dropdown -->
+        <div id="profile-info" class="position-absolute bg-white border rounded shadow p-2 mt-5" style="right: 20px; top: 70px; display: none; min-width: 200px; z-index: 999;">
+          <p id="username" class="mb-1 fw-semibold text-dark"></p>
+          <p id="useremail" class="mb-0 text-muted small"></p>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+<!-- Hero Section -->
+<section id="home" class="hero-section text-center py-5">
+  <div class="container">
+    <h1 class="display-5 fw-bold mb-4">Protect Your Voice — Detect Deepfake Audio Instantly</h1>
+   
+    <!-- <form action="/predict" method="POST" enctype="multipart/form-data">
+      <p class="mb-3">Upload your audio file to verify authenticity</p>
+      
+      <input type="file" name="audio" accept=".wav, .mp3" class="form-control-file" id="fileInput" required>
+      
+      <label for="fileInput" class="btn btn-success">Choose File</label>
+      
+      <button type="submit" class="btn btn-purple">Upload and Analyze</button>
+    </form>
+     -->
+     <form action="/predict" method="POST" enctype="multipart/form-data">
+      <p class="mb-3">Upload your audio file to verify authenticity</p>
+    
+      <!-- Hidden file input -->
+      <input type="file" name="audio" accept=".wav, .mp3" class="hidden-input" id="fileInput" required>
+    
+      <!-- Purple styled label acting as button -->
+      <label for="fileInput" class="btn custom-purple btn-wide rounded-pill me-2">Choose File</label>
+    
+      <!-- Green submit button -->
+      <button type="submit" class="btn custom-green btn-wide rounded-pill">Upload and Analyze</button>
+    </form>
+    
+    
+    
+    
+    
+  
+
+</div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="py-5">
+  <div class="container">
+    <!-- Single Feature Block -->
+    <div class="row align-items-center mb-5">
+      <div class="col-md-6">
+        <h2 class="mb-3 fw-bold">Detect Deepfake Audio Effortlessly in Seconds</h2>
+<ul class="list-unstyled">
+  <li class="mb-4">
+    <strong>Upload Instantly:</strong> Upload your audio files with a single click and get real-time deepfake detection results.
+  </li>
+  <li class="mb-4">
+    <strong>Analyze Voices Automatically:</strong> Our system processes and analyzes voice patterns instantly — no manual steps needed.
+  </li>
+  <li class="mb-4">
+    <strong>Simple and Fast:</strong> A user-friendly interface designed for quick and accurate audio verification, even for first-time users.
+  </li>
+</ul>
+
+      </div>
+      <div class="col-md-6 text-center">
+        <img src="static/images/image.png" alt="Deepfake Detection" class="img-fluid rounded" style="width: 100%; max-width: 600px;">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Why EchoLock Section -->
+<section class="hero-section2 text-center py-5 bg-light">
+  <div class="container">
+    <h2 class="display-5 fw-bold mb-4 text-dark">Why EchoLock?</h2>
+    <p class="mb-5 text-muted">
+      EchoLock empowers you to instantly detect deepfake audios with cutting-edge AI, real-time analysis, and seamless user experience — keeping your voice and data safe.
+    </p>
+    <div class="row g-4">
+      <div class="col-md-3">
+        <div class="p-4 border rounded-3 shadow-lg h-100">
+          <h5 class="fw-bold">Real-Time Audio Scanning</h5>
+          <p class="small text-muted">Get immediate feedback by analyzing audio authenticity in seconds.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="p-4 border rounded-3 shadow-lg h-100">
+          <h5 class="fw-bold">Deep Learning Accuracy</h5>
+          <p class="small text-muted">Powered by advanced deep learning models for reliable real vs fake detection.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="p-4 border rounded-3 shadow-lg h-100">
+          <h5 class="fw-bold">.wav Format Supported</h5>
+          <p class="small text-muted">Easily upload WAv audio format for verification.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="p-4 border rounded-3 shadow-lg h-100">
+          <h5 class="fw-bold">Simple & Secure</h5>
+          <p class="small text-muted">User-friendly interface with a strong focus on privacy and data security.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-4 text-center">
+  <div class="container">
+    <p class="mb-0">© 2025 EchoLock. All Rights Reserved.</p>
+  </div>
+</footer>
+<script>
+
+//   // On profile icon click, fetch user data
+//   document.getElementById('profile-icon').addEventListener('click', async () => {
+//     const token = localStorage.getItem('authToken'); // Must store token after login
+//     if (!token) return alert('You are not logged in.');
+
+//     try {
+//       const res = await fetch('http://localhost:5000/api/auth/me', {
+//         headers: {
+//           'Authorization': `Bearer ${token}`
+//         }
+//       });
+// if (!localStorage.getItem('token')) {
+//   // window.location.href = 'login.html'; // or show a login modal
+//   print('Please log in to view your profile.');
+// }
+//       const data = await res.json();
+//       if (res.ok) {
+//         document.getElementById('username').innerText = data.name;
+//         document.getElementById('useremail').innerText = data.email;
+//         document.getElementById('profile-info').style.display = 'block';
+//       } else {
+//         alert(data.message || 'Error fetching user');
+//       }
+//     } catch (err) {
+//       console.error(err);
+//       alert('Server error');
+//     }
+//   });
+  // On profile icon click, fetch user data and toggle profile visibility
+  document.getElementById('profile-icon').addEventListener('click', async () => {
+  const profileInfo = document.getElementById('profile-info');
+  const token = localStorage.getItem('authToken'); // Must store token after login
+  if (!token) {
+    alert('You are not logged in.');  // Show alert if no token
+    return;
+  }
+
+  try {
+    const res = await fetch('http://localhost:5000/api/auth/me', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      // Update profile information if the response is successful
+      document.getElementById('username').innerText = data.name;
+      document.getElementById('useremail').innerText = data.email;
+
+      // Toggle the profile info visibility
+      if (profileInfo.style.display === 'none' || profileInfo.style.display === '') {
+        profileInfo.style.display = 'block'; // Show profile info
+      } else {
+        profileInfo.style.display = 'none'; // Hide profile info
+      }
+    } else {
+      alert(data.message || 'Error fetching user data.');
+    }
+  } catch (err) {
+    console.error(err);
+    alert('Server error');
+  }
+});
+document.getElementById('logout-btn').addEventListener('click', () => {
+  // Remove token from localStorage
+ // localStorage.removeItem('authToken');
+  // Redirect to signup page
+  window.location.href = '/login';
+});
+
+
+</script>
+
+</body>
+</html>

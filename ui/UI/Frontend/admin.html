@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Echo Lock Admin Panel</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fc;
+      color: #333;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 240px;
+      background-color: white;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1rem;
+    }
+
+    .sidebar-top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo img {
+      width: 100px;
+      margin-bottom: 10px;
+    }
+
+    .logo-text {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #130a74;
+      margin-bottom: 2rem;
+    }
+
+    .nav-button {
+      padding: 12px 18px;
+      margin-bottom: 8px;
+      border: none;
+      background: none;
+      text-align: left;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #130a74;
+      width: 100%;
+    }
+
+    .nav-button:hover {
+      background-color: #130a74;
+      color: white;
+    }
+
+    .divider {
+      height: 1px;
+      background-color: #eee;
+      margin: 10px 0;
+      width: 100%;
+    }
+
+    .profile-section {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .profile-icon {
+      width: 50px;
+      height: 50px;
+      background-color: #130a74;
+      border-radius: 50%;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin: 0 auto;
+      cursor: pointer;
+    }
+
+    .profile-menu {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .profile-menu.show {
+      display: block;
+    }
+
+    .profile-menu p {
+      margin: 0.5rem 0;
+      font-weight: 500;
+    }
+
+    .logout-btn {
+      background-color: #130a74;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .logout-btn:hover {
+      background-color: #0f0865;
+    }
+
+    .main {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table th, table td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+
+    }
+
+    .button {
+      background-color: #130a74;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .button:hover {
+      background-color: #0f0865;
+    }
+    .delete-btn {
+  background-color: #e74c3c;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+.section {
+  display: none;
+}
+.section.active {
+  display: block;
+}
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="sidebar">
+    <div class="sidebar-top">
+      <div class="logo">
+        <img src="static/images/logo.png" alt="Echo Lock Logo">
+      </div>
+      <div class="logo-text">Echo Lock</div>
+
+      <button class="nav-button" onclick="showSection('dashboard')">Dashboard</button>
+      <div class="divider"></div>
+
+      <button class="nav-button" onclick="showSection('users')">Users</button>
+      <div class="divider"></div>
+
+      <button class="nav-button" onclick="showSection('predictions')">Predictions</button>
+      <div class="divider"></div>
+    </div>
+
+    <div class="profile-section">
+      <div class="profile-icon" onclick="toggleProfile()">A</div>
+      <div id="profileMenu" class="profile-menu">
+        <p>Welcome Ariba</p>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="main">
+    <!-- Dashboard -->
+    <div id="dashboard" class="section active">
+      <h2>Model Overview</h2>
+      <div class="grid">
+        <div class="card"><h3>Accuracy</h3><p>97%</p></div>
+        <div class="card"><h3>Precision</h3><p>98%</p></div>
+        <div class="card"><h3>F1 Score</h3><p>97.2%</p></div>
+        <div class="card"><h3>Total Users</h3><p id="userCount">...</p></div>
+      </div>
+      <div class="card">
+        <h3>Prediction Trend</h3>
+        <!-- <img src="/static/sample_chart.png" alt="Graph" width="100%"> -->
+      </div>
+    </div>
+
+    <!-- Users Section -->
+    <div id="users" class="section">
+      <h2>User Management</h2>
+      <div class="card">
+        <form>
+          <input type="text" placeholder="Username" required>
+          <input type="email" placeholder="Email" required>
+          <button type="submit" class="button">Add User</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3>Registered Users</h3>
+        <table>
+          <thead>
+            <tr><th>Name</th><th>Email</th><th>Verified</th></tr>
+          </thead>
+          <tbody id="user-table-body">
+            <!-- Users will be inserted here -->
+          </tbody>
+        </table>
+        </div>
+    </div>
+<!-- Predictions Section -->
+<!-- Predictions Section -->
+<div id="predictions" class="section">
+
+  <h2>Predictions</h2>
+  <div class="card">
+    <table>
+
+      <thead>
+        <tr >
+          <th>Filename</th>
+          <th>Result</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody id="prediction-table-body" >
+        
+        <!-- Predictions will be inserted here -->
+      </tbody>       
+    </table>
+  </div>
+</div>
+
+
+<script>
+  
+  
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(section => {
+    section.classList.remove('active');
+  });
+
+  const selectedSection = document.getElementById(id);
+  if (selectedSection) {
+    selectedSection.classList.add('active');
+
+    if (id === 'users') {
+      fetchUsers();
+    } else if (id === 'predictions') {
+      fetchPredictions();
+    }
+  } else {
+    console.error(`No element found with id="${id}"`);
+  }
+}
+
+
+  function fetchUsers() {
+    fetch('http://localhost:5000/api/users')
+      .then(response => response.json())
+      .then(users => {
+        const table = document.querySelector('#users table');
+        // Remove all rows except header
+        table.innerHTML = '<tr><th>Name</th><th>Email</th><th>Verified</th><th>Actions</th></tr>';
+        users.forEach(user => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${user.name}</td>
+            <td>${user.email}</td>
+            <td style="color:${user.is_verified ? 'green' : 'red'}">
+              ${user.is_verified ? 'Yes' : 'No'}
+            </td>
+<td>
+  <button class="button delete-btn" onclick="deleteUser('${user.email}', this.closest('tr'))">
+    Delete
+  </button>
+</td>
+          `;
+          table.appendChild(row);
+        });
+      })
+      .catch(error => console.error('Error loading users:', error));
+  }
+  function deleteUser(email, rowElement) {
+  if (confirm(`Are you sure you want to delete ${email}?`)) {
+    fetch(`http://localhost:5000/users/${email}`, {
+      method: 'DELETE'
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        rowElement.remove();
+      } else {
+        alert('Failed to delete user.');
+      }
+    })
+    .catch(err => {
+      console.error('Error:', err);
+      alert('Server error.');
+    });
+  }
+}
+function fetchUserCount() {
+  fetch('http://localhost:5000/api/user_count')
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('userCount').innerText = data.count;
+    })
+    .catch(error => {
+      console.error('Error fetching user count:', error);
+    });
+}
+
+fetchUserCount(); // Call on load
+
+
+
+
+function fetchPredictions() {
+  console.log("Fetching predictions..."); // Debugging: Check if the function is called
+  fetch('http://localhost:5000/api/predictions')
+    .then(response => response.json())
+    .then(data => {
+      const tableBody = document.getElementById('prediction-table-body');
+      console.log("Table Body:", tableBody); // Debugging: Check if the table body is found
+      // Check if the table body element exists
+      if (!tableBody) {
+        console.error("Table body element not found!");
+        return;
+      }
+
+      tableBody.innerHTML = ''; // Clear old data
+
+      if (Array.isArray(data) && data.length > 0) {
+        // Debugging: Log the structure of the returned data
+        console.log("Predictions Data:", data);
+  
+        // Loop through the data and populate the table rows
+        data.forEach(pred => {
+          const row = document.createElement('tr');
+          console.log("Prediction Row:", pred); // Debugging: Check each prediction row
+          row.innerHTML = `
+            <td>${pred.filename}</td>
+            <td>${pred.result}</td>
+            <td>${new Date(pred.date).toLocaleString()}</td>
+          `;
+          tableBody.appendChild(row);
+        });
+      } else {
+        tableBody.innerHTML = "<tr><td colspan='3'>No predictions available.</td></tr>";
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching predictions:', error);
+      const tableBody = document.getElementById('prediction-table-body');
+      if (tableBody) {
+        tableBody.innerHTML = "<tr><td colspan='3'>Error loading predictions.</td></tr>";
+      }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+  function toggleProfile() {
+    document.getElementById('profileMenu').classList.toggle('show');
+  }
+
+  function logout() {
+    window.location.href = 'login.html';
+  }
+  window.onerror = function(message, source, lineno, colno, error) {
+    console.error("JS Error:", message, "at", source + ":" + lineno);
+  };
+</script>
+
+
+</body>
+</html>

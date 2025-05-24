@@ -1,0 +1,136 @@
+body {
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .text-purple {
+    color: #130a74;
+  }
+ 
+  
+.nav-link {
+  color: #083b6d; 
+}
+
+.nav-link:hover {
+  color: #600308;  
+}
+
+/* Change color of the active link */
+.nav-item.active .nav-link {
+  color: #9d2b12;  /* Replace with your desired active color */
+}
+#profile-icon:hover {
+  opacity: 0.85;
+  transform: scale(1.1);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#profile-info p {
+  margin: 0;
+  font-size: 14px;
+}
+/* Optional: Style the file input to make it invisible */
+input[type="file"] {
+  display: none;
+}
+
+/* Custom button styling */
+label[for="fileInput"] {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: green;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+}
+
+label[for="fileInput"]:hover {
+  background-color: darkgreen;
+}
+
+
+
+
+ 
+  
+  
+  .btn-purple {
+    background-color: #130a74;
+    color: #fff;
+    border-radius: 25px;
+    padding: 8px 20px;
+  }
+  
+  .btn-purple:hover {
+    background-color: #1e2055;
+  }
+  
+  /* .hero-section {
+    background: linear-gradient(to bottom right, #f5f5f5, #e0e0ff);
+  } */
+  .hero-section {
+    background: linear-gradient(to bottom right, #f5f5f5, #e0e0ff), url('img.jpg');
+    background-size: cover; /* Ensures the image covers the whole section */
+    background-position: center center; /* Centers the image */
+    background-attachment: fixed; /* Ensures the background stays in place while scrolling */
+    padding: 5rem 0; /* Adds padding for spacing */
+  }
+  
+  
+  .upload-box {
+    max-width: 500px;
+    background: #fff;
+    border: 2px dashed #7f00ff;
+  }
+  /* Background with gradient */
+
+.hero-section2
+{
+color: #130a74;
+}
+/* Change color of h2 in the hero-section2 */
+.hero-section2 .container .h2 {
+    color: #130a74;
+  }
+
+  
+  footer {
+    background-color: #05203c;
+    color: #fff;
+  }
+  /* Hide real file input */
+.hidden-input {
+  display: none;
+}
+
+/* Common width and look */
+.btn-wide {
+  width: 200px;
+  font-weight: 500;
+  padding: 10px 0;
+  text-align: center;
+}
+
+/* Purple button style */
+.custom-purple {
+  background-color: #5a065a !important;
+  color: white !important;
+  border: none !important;
+}
+
+.custom-purple:hover {
+  background-color: #4c0d6c !important;
+}
+
+/* Green button style */
+.custom-green {
+  background-color: #1a652b !important;
+  color: white !important;
+  border: none !important;
+}
+
+.custom-green:hover {
+  background-color: #218838 !important;
+}
